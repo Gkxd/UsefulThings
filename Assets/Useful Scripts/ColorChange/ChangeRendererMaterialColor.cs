@@ -16,7 +16,12 @@ namespace UsefulThings {
         }
 
         void Update() {
-            m.color = getColor();
+            if (colorName == "") {
+                m.color = getColor();
+            }
+            else {
+                m.SetColor(colorName, getColor());
+            }
         }
     }
 }
