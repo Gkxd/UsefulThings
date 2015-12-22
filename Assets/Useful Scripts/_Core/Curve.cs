@@ -13,7 +13,7 @@ namespace UsefulThings {
         public float phase = 0;
 
         public float Evaluate(float t) {
-            return amplitude * curve.Evaluate(frequency * t + phase);
+            return amplitude * curve.Evaluate(frequency * (t + phase));
         }
     }
 }
