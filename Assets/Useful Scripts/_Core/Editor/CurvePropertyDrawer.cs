@@ -13,7 +13,7 @@ namespace UsefulThings {
 
             position.height = 16;
 
-            EditorGUI.PropertyField(position, property.FindPropertyRelative("curve"));
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("curve"), label);
             property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, new GUIContent(""), true);
 
             if (!property.isExpanded) {
@@ -29,7 +29,7 @@ namespace UsefulThings {
             int oldIndentLevel = EditorGUI.indentLevel;
 
             EditorGUI.indentLevel = 0;
-            EditorGUIUtility.LookLikeControls(32f);
+            EditorGUIUtility.labelWidth = 32f;
 
             EditorGUI.PropertyField(position, property.FindPropertyRelative("amplitude"), new GUIContent("AMP"));
             position.x += position.width + 10;
