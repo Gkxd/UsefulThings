@@ -17,7 +17,7 @@ namespace UsefulThings {
             transform.position = initialPosition + new Vector3(
                 moveX ? curveX.Evaluate(lifeTime) : 0,
                 moveY ? curveY.Evaluate(lifeTime) : 0,
-                moveX ? curveZ.Evaluate(lifeTime) : 0);
+                moveZ ? curveZ.Evaluate(lifeTime) : 0);
         }
     }
 }
