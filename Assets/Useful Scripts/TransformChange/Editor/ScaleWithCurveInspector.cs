@@ -3,6 +3,7 @@ using UnityEditor;
 
 namespace UsefulThings {
     [CustomEditor(typeof(ScaleWithCurve))]
+    [CanEditMultipleObjects]
     public class ScaleWithCurveInspector : Editor {
         public override void OnInspectorGUI() {
             ScaleWithCurve scaleWithCurve = (ScaleWithCurve)target;

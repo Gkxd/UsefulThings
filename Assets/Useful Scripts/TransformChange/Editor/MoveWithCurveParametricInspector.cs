@@ -3,10 +3,9 @@ using UnityEditor;
 
 namespace UsefulThings {
     [CustomEditor(typeof(MoveWithCurveParametric))]
+    [CanEditMultipleObjects]
     public class MoveWithCurveParametricInspector : Editor {
         public override void OnInspectorGUI() {
-            MoveWithCurveParametric moveWithCurveParametric = (MoveWithCurveParametric)target;
-
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("resetTimeOnEnable"));
@@ -14,20 +13,24 @@ namespace UsefulThings {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Movement Directions");
             EditorGUILayout.LabelField("X", GUILayout.Width(20));
-            moveWithCurveParametric.moveX = EditorGUILayout.Toggle(moveWithCurveParametric.moveX, GUILayout.Width(20));
+            bool moveX = EditorGUILayout.Toggle(serializedObject.FindProperty("moveX").boolValue, GUILayout.Width(20));
             EditorGUILayout.LabelField("Y", GUILayout.Width(20));
-            moveWithCurveParametric.moveY = EditorGUILayout.Toggle(moveWithCurveParametric.moveY, GUILayout.Width(20));
+            bool moveY = EditorGUILayout.Toggle(serializedObject.FindProperty("moveY").boolValue, GUILayout.Width(20));
             EditorGUILayout.LabelField("Z", GUILayout.Width(20));
-            moveWithCurveParametric.moveZ = EditorGUILayout.Toggle(moveWithCurveParametric.moveZ, GUILayout.Width(20));
+            bool moveZ = EditorGUILayout.Toggle(serializedObject.FindProperty("moveZ").boolValue, GUILayout.Width(20));
             EditorGUILayout.EndHorizontal();
 
-            if (moveWithCurveParametric.moveX) {
+            serializedObject.FindProperty("moveX").boolValue = moveX;
+            serializedObject.FindProperty("moveY").boolValue = moveY;
+            serializedObject.FindProperty("moveZ").boolValue = moveZ;
+
+            if (moveX) {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("curveX"));
             }
-            if (moveWithCurveParametric.moveY) {
+            if (moveY) {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("curveY"));
             }
-            if (moveWithCurveParametric.moveZ) {
+            if (moveZ) {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("curveZ"));
             }
 
