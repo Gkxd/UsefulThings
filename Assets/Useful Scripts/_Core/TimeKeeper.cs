@@ -2,11 +2,11 @@
 using System.Collections;
 
 namespace UsefulThings {
-    public abstract class _TimedBehaviour : MonoBehaviour {
+    [DisallowMultipleComponent]
+    public class TimeKeeper : MonoBehaviour {
         public bool resetTimeOnEnable;
 
         private float startTime;
-
 
         public float lifeTime { get { return Time.time - startTime; } }
 

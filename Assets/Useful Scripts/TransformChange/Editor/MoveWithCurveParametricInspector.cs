@@ -8,8 +8,6 @@ namespace UsefulThings {
         public override void OnInspectorGUI() {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("resetTimeOnEnable"));
-
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Movement Directions");
             EditorGUILayout.LabelField("X", GUILayout.Width(20));

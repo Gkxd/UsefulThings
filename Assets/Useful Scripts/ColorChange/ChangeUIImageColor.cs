@@ -7,7 +7,8 @@ namespace UsefulThings {
     public class ChangeUIImageColor : _ChangeColor {
 
         private Image image;
-        void Start() {
+        protected override void Start() {
+            base.Start();
             image = GetComponent<Image>();
         }
 

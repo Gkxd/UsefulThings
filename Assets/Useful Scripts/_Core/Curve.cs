@@ -15,5 +15,9 @@ namespace UsefulThings {
         public float Evaluate(float t) {
             return amplitude * curve.Evaluate(frequency * (t + phase));
         }
+
+        public float Evaluate(TimeKeeper tk) {
+            return amplitude * curve.Evaluate(frequency * (tk.lifeTime + phase));
+        }
     }
 }

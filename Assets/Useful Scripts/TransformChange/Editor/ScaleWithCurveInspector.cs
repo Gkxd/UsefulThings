@@ -6,14 +6,11 @@ namespace UsefulThings {
     [CanEditMultipleObjects]
     public class ScaleWithCurveInspector : Editor {
         public override void OnInspectorGUI() {
-            ScaleWithCurve scaleWithCurve = (ScaleWithCurve)target;
-
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("resetTimeOnEnable"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("uniformScale"));
 
-            if (scaleWithCurve.uniformScale) {
+            if (serializedObject.FindProperty("uniformScale").boolValue) {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("curve"));
             }
             else {

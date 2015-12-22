@@ -7,7 +7,8 @@ namespace UsefulThings {
     public class ChangeUITextColor : _ChangeColor {
 
         private Text text;
-        void Start() {
+        protected override void Start() {
+            base.Start();
             text = GetComponent<Text>();
         }
 

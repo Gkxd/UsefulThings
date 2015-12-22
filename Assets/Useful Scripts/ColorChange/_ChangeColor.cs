@@ -2,12 +2,19 @@
 using System.Collections;
 
 namespace UsefulThings {
-    public abstract class _ChangeColor : _TimedBehaviour {
+    [RequireComponent(typeof(TimeKeeper))]
+    public abstract class _ChangeColor : MonoBehaviour {
         public Gradient color;
         public Curve curve;
 
+        private TimeKeeper timeKeeper;
+
+        protected virtual void Start() {
+            timeKeeper = GetComponent<TimeKeeper>();
+        }
+
         protected Color getColor() {
-            return color.Evaluate(curve.Evaluate(Time.time - lifeTime));
+            return color.Evaluate(curve.Evaluate(timeKeeper));
         }
     }
 }

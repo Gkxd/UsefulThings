@@ -11,7 +11,8 @@ namespace UsefulThings {
         public int materialIndex;
 
         private Material m;
-        void Start() {
+        protected override void Start() {
+            base.Start();
             m = GetComponent<Renderer>().materials[materialIndex];
         }
 
