@@ -11,13 +11,15 @@ namespace UsefulThings {
         public float frequency = 1;
         [Tooltip("Phase Offset")]
         public float phase = 0;
+        [Tooltip("Curve Offset")]
+        public float offset = 0;
 
         public float Evaluate(float t) {
-            return amplitude * curve.Evaluate(frequency * (t + phase));
+            return amplitude * curve.Evaluate(frequency * (t + phase)) + offset;
         }
 
         public float Evaluate(TimeKeeper tk) {
-            return amplitude * curve.Evaluate(frequency * (tk.lifeTime + phase));
+            return Evaluate(tk.lifeTime);
         }
     }
 }
