@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyGameObjectAfterSeconds : MonoBehaviour {
-    public float seconds;
+namespace UsefulThings {
+    public class DestroyGameObjectAfterSeconds : MonoBehaviour {
+        public float seconds;
 
-    void Start() {
-        Destroy(gameObject, seconds);
+        void Start() {
+            Destroy(gameObject, seconds);
+        }
     }
 }
