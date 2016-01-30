@@ -14,9 +14,12 @@ namespace UsefulThings {
             frequencySpectrum = new float[1 << logNumFrequencySamples];
         }
 
+        void Update() {
+            AudioListener.GetSpectrumData(frequencySpectrum, 0, FFTWindow.Rectangular);
+        }
+
         void OnAudioFilterRead(float[] data, int channels) {
             soundWave = data;
-            AudioListener.GetSpectrumData(frequencySpectrum, 0, FFTWindow.Rectangular);
         }
     }
 }
