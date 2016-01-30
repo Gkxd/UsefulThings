@@ -20,8 +20,12 @@ namespace UsefulThings {
             }
         }
 
+        public void setTimeTo(float time) {
+            startTime = Time.time - time;
+        }
+
         public void resetTime() {
-            startTime = Time.time;
+            setTimeTo(0);
         }
     }
 }
