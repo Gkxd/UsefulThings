@@ -19,5 +19,9 @@ namespace UsefulThings {
                 startTime = Time.time;
             }
         }
+
+        public void resetTime() {
+            startTime = Time.time;
+        }
     }
 }
