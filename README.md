@@ -12,3 +12,6 @@ If you are using Git to manage your Unity Project, you can include this reposito
     git submodule add https://github.com/Gkxd/UsefulThings.git
     
 This will place the repository in the *current directory*.
+
+##### Updating
+To update the submodule, navigate to the "UsefulThings" directory and use the `git pull` command.
