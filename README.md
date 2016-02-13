@@ -5,3 +5,13 @@ This is currently a work in progress.
 
 ### Documentation
 Documentation is not available yet, but example scenes are included in the repository.
+
+### Usage
+If you are using Git to manage your Unity Project, you can include this repository as a submodule by using this command:
+
+    git submodule add https://github.com/Gkxd/UsefulThings.git
+    
+This will place the repository in the *current directory*.
+
+##### Updating
+To update the submodule, navigate to the "UsefulThings" directory and use the `git pull` command.
