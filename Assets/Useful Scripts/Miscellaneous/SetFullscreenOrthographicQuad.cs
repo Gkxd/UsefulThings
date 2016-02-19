@@ -4,7 +4,7 @@ using System.Collections;
 namespace UsefulThings {
     [ExecuteInEditMode]
     public class SetFullscreenOrthographicQuad : MonoBehaviour {
-        public Camera camera;
+        public new Camera camera;
         void Start() {
             float height = camera.orthographicSize * 2;
             float width = height * camera.aspect;
