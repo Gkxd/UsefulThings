@@ -7,7 +7,7 @@ namespace UsefulThings {
 
         // To actually shake the camera, offset the camera's position with CameraShakeOffset
         // in another script, and call CameraShake.ShakeCamera() from anywhere whenever you
-        // want to shake the camera. (See CameraShakeTest.cs for example usage.)
+        // want to shake the camera. (See CameraShakeMovement.cs for an example)
 
         private static CameraShake instance;
 

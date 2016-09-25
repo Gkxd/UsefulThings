@@ -2,7 +2,9 @@
 using System.Collections;
 
 namespace UsefulThings {
-    public class CameraShakeTest : MonoBehaviour {
+    public class CameraShakeMovement : MonoBehaviour {
+
+        public bool pressSpaceToShake;
 
         Vector3 originalPosition;
 
@@ -13,8 +15,8 @@ namespace UsefulThings {
         void Update() {
             transform.localPosition = originalPosition + CameraShake.CameraShakeOffset;
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                CameraShake.ShakeCamera(1, 0.2f);
+            if (pressSpaceToShake && Input.GetKeyDown(KeyCode.Space)) {
+               CameraShake.ShakeCamera(1, 0.2f);
             }
         }
     }
