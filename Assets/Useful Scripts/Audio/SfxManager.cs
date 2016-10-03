@@ -21,6 +21,8 @@ namespace UsefulThings
         private bool[] sfxLocks;
         private bool[] loopLocks;
 
+        private Coroutine[] loopVolumeControllers;
+
         void Start()
         {
             instance = this;
@@ -56,7 +58,9 @@ namespace UsefulThings
             }
 
             sfxLocks = new bool[sfxBank.Length];
+
             loopLocks = new bool[loopBank.Length];
+            loopVolumeControllers = new Coroutine[loopBank.Length];
         }
 
         /// <summary>
@@ -122,6 +126,38 @@ namespace UsefulThings
             {
                 loopObjects[loopId].SetActive(true);
                 loopObjects[loopId].GetComponent<AudioSource>().volume = volume;
+
+                if (loopVolumeControllers[loopId] != null)
+                {
+                    StopCoroutine(loopVolumeControllers[loopId]);
+                    loopVolumeControllers[loopId] = null;
+                }
+            }
+        }
+
+        public static void PlayLoop(int loopId, Curve volume)
+        {
+            if (instance) instance.playLoop(loopId, volume);
+        }
+
+        private void playLoop(int loopId, Curve volume)
+        {
+            if (loopObjects[loopId])
+            {
+                loopObjects[loopId].SetActive(true);
+                loopVolumeControllers[loopId] = StartCoroutine(LoopVolumeControl(loopId, volume));
+            }
+        }
+
+        private IEnumerator LoopVolumeControl(int loopId, Curve volume)
+        {
+            float startTime = Time.time;
+            AudioSource audio = loopObjects[loopId].GetComponent<AudioSource>();
+
+            while (true)
+            {
+                audio.volume = volume.Evaluate(Time.time - startTime);
+                yield return null;
             }
         }
 
@@ -136,7 +172,16 @@ namespace UsefulThings
 
         private void stopLoop(int loopId)
         {
-            if (loopObjects[loopId]) loopObjects[loopId].SetActive(false);
+            if (loopObjects[loopId])
+            {
+                loopObjects[loopId].SetActive(false);
+
+                if (loopVolumeControllers[loopId] != null)
+                {
+                    StopCoroutine(loopVolumeControllers[loopId]);
+                    loopVolumeControllers[loopId] = null;
+                }
+            }
         }
     }
 }
