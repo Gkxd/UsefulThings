@@ -104,6 +104,12 @@ namespace UsefulThings
             {
                 index = ~index - 1;
 
+                if (index < 0)
+                {
+                    index = 0;
+                }
+
+
                 if (index < cumulativeDistances.Count - 1)
                 {
                     float distancePercent = (distance - cumulativeDistances[index]) / (cumulativeDistances[index + 1] - cumulativeDistances[index]);
@@ -130,6 +136,11 @@ namespace UsefulThings
             if (index < 0)
             {
                 index = ~index - 1;
+            }
+
+            if (index < 0)
+            {
+                index = 0;
             }
 
             if (index < cumulativeDistances.Count - 1)
