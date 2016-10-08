@@ -71,7 +71,7 @@ namespace UsefulThings
 
                 for (float i = 0; i < curve.points.Count / 3; i += 0.02f)
                 {
-                    Vector3 p0 = t.TransformPoint(curve.EvaluateUniform(i));
+                    Vector3 p0 = curve.EvaluateUniform(i);
                     float size = HandleUtility.GetHandleSize(p0) * 0.02f;
 
                     Vector3[] rect = new Vector3[] { p0 - right * size, p0 - up * size, p0 + right * size, p0 + up * size };

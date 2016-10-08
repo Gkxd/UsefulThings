@@ -41,7 +41,7 @@ namespace UsefulThings
             float c = t1 * t0 * t0 * 3;
             float d = t0 * t0 * t0;
 
-            return a * p0 + b * p1 + c * p2 + d * p3;
+            return transform.TransformPoint(a * p0 + b * p1 + c * p2 + d * p3);
         }
 
         public Vector3 Derivative(float t)
@@ -61,7 +61,7 @@ namespace UsefulThings
             float b = t1 * t0;
             float c = t0 * t0;
 
-            return a * (p1 - p0) + b * (p2 - p1) + c * (p3 - p2);
+            return transform.TransformVector(a * (p1 - p0) + b * (p2 - p1) + c * (p3 - p2));
         }
 
         /// <summary>
@@ -113,20 +113,20 @@ namespace UsefulThings
                 if (index < cumulativeDistances.Count - 1)
                 {
                     float distancePercent = (distance - cumulativeDistances[index]) / (cumulativeDistances[index + 1] - cumulativeDistances[index]);
-                    return Vector3.Lerp(curveApproximation[index], curveApproximation[index + 1], distancePercent);
+                    return transform.TransformPoint(Vector3.Lerp(curveApproximation[index], curveApproximation[index + 1], distancePercent));
                 }
                 else
                 {
                     float distancePercent = (distance - cumulativeDistances[index]) / (totalDistance - cumulativeDistances[index]);
-                    return Vector3.Lerp(curveApproximation[index], points[points.Count - 1], distancePercent);
+                    return transform.TransformPoint(Vector3.Lerp(curveApproximation[index], points[points.Count - 1], distancePercent));
                 }
             }
             else
             {
-                return curveApproximation[index];
+                return transform.TransformPoint(curveApproximation[index]);
             }
         }
-        
+
         public Vector3 DerivativeUniform(float t)
         {
             int numSegments = points.Count / 3;
@@ -145,11 +145,11 @@ namespace UsefulThings
 
             if (index < cumulativeDistances.Count - 1)
             {
-                return curveApproximation[index + 1] - curveApproximation[index];
+                return transform.TransformVector(curveApproximation[index + 1] - curveApproximation[index]);
             }
             else
             {
-                return points[points.Count - 1] - curveApproximation[index];
+                return transform.TransformVector(points[points.Count - 1] - curveApproximation[index]);
             }
         }
 
@@ -186,9 +186,11 @@ namespace UsefulThings
         public void AddSegment()
         {
             Vector3 lastPoint = points[points.Count - 1];
-            points.Add(lastPoint + new Vector3(0, 0, 1));
-            points.Add(lastPoint + new Vector3(0, 0, 2));
-            points.Add(lastPoint + new Vector3(0, 0, 3));
+            Vector3 lastTangent = points[points.Count - 2];
+            Vector3 offset = lastPoint - lastTangent;
+            points.Add(lastPoint + offset);
+            points.Add(lastPoint + 2 * offset);
+            points.Add(lastPoint + 3 * offset);
 
             continuity.Add(ContinuityType.NONE);
             continuity.Add(ContinuityType.NONE);
